@@ -36,35 +36,32 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    public function edit($id)
+    public function edit(Task $task)
     {
-        $task = Task::findOrFail($id);
         return view('tasks.edit', compact('task'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        $task = Task::findOrFail($id);
-
         $request->validate([
             'task_name' => 'required',
             'description' => 'nullable',
             'due_date' => 'nullable|date',
+            'status' => 'required',
         ]);
 
         $task->update([
             'task_name' => $request->task_name,
             'description' => $request->description,
-            'status' => $request->status ?? $task->status,
+            'status' => $request->status,
             'due_date' => $request->due_date,
         ]);
 
         return redirect()->route('tasks.index');
     }
 
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        $task = Task::findOrFail($id);
         $task->delete();
 
         return redirect()->route('tasks.index');
