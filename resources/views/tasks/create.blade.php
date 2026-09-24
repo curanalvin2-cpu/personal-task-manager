@@ -10,7 +10,7 @@
     <div class="container" style="max-width: 600px;">
         <h2 class="mb-4 fw-bold">Add New Task</h2>
 
-        <form action="/tasks" method="POST">
+        <form action="{{ route('tasks.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Task Name</label>
@@ -28,7 +28,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary fw-bold">Save Task</button>
-            <a href="/tasks" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </body>
